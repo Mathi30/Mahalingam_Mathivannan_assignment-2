@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>jQuery To-Do Application</title>
+    <!-- <link
+      rel="stylesheet"
+      href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="to-do-app.css" />
+
+   <!-- Jquery ui files -->
+    <link rel="stylesheet" href="jquery-ui.min.css" />
+    <script  src="jquery.js"></script>
+    <script src="jquery-ui.min.js" ></script>
+
+  <script>
+  $( function() {
+    $( "#append" ).sortable();
+    // $( "#sortable" ).disableSelection();
+  } );
+  </script>
+
+  <script>
+        $("#input_text").focus();
+  </script>
+  
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="page-header">
+          <h1>jQuery To-Do Application</h1>
+        </div>
+
+        <form>
+          <input
+            class="form-control"
+            type="text"
+            id="input_text"
+            placeholder="Add an item..."
+          />
+          <button type="submit" id="send" class="btn">Click here</button>
+          <button type="submit" id="clear" class="btn">Clear</button>
+        </form>
+
+        <ul id="append">
+        <!-- To do items get added dynamically here -->
+        </ul>
+      </div>
+    </main>
+  
+    <script>
+      $(document).ready(function () {
+
+        // INSERT CODE HERE
+        const $send = $("#send");
+        let first = $("#append");
+        let input = $("#input_text");
+        const $clear = $("#clear");
+
+        $send.click(readInput);
+        input.keypress(readInputEnter);
+
+        // read the input function by mouse click
+        function readInput(e) {
+          e.preventDefault();
+          // let inputValue = $(this).val();
+          let inputValue = input.val();
+          let inputLength = inputValue.length;
+          if (inputValue.length != 0 || typeof inputValue === "undefined") {
+            first.append(
+              "<li class='change'>" +
+                inputValue +
+                "<a href='javascript:void(0)' class='remove'>&times</a></li>"
+            );
+            input.val("");
+          } else {
+            alert("please enter, input can't be empty mouse");
+          }
+        }
+        // read the input function by enter key
+        function readInputEnter(e) {
+          if (e.which == 13) {
+            e.preventDefault();
+            let inputVal = $(this).val();
+            if (inputVal.length != 0) {
+              first.append(
+                "<li class='change'>" +
+                  inputVal +
+                  "<a href='javascript:void(0)' class='remove'>&times</a></li>"
+              );
+              input.val("");
+            } else {
+              alert("please enter, input can't be empty enter");
+            }
+          }
+        }
+
+        $(document).on("click", "li.change", function () {
+            $(this).addClass("addChecbox");
+            $(this).parent().append($(this));
+        });
+
+        $(document).on("click", "a.remove", function () {
+            $(this).parent().remove();
+        });
+
+        $clear.click(clearField);
+         function clearField(e) {
+            e.preventDefault();
+            input.val("");
+        }
+        // end of document
+      });
+        
+      
+    </script
+    
+   
+  </body>
+</html>
