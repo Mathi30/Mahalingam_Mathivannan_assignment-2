@@ -75,7 +75,7 @@
           let inputValue = input.val();
           let inputLength = inputValue.length;
           if (inputValue.length != 0 || typeof inputValue === "undefined") {
-            first.append(
+            first.prepend(
               "<li class='change'>" +
                 inputValue +
                 "<a href='javascript:void(0)' class='remove'>&times</a></li>"
@@ -91,7 +91,7 @@
             e.preventDefault();
             let inputVal = $(this).val();
             if (inputVal.length != 0) {
-              first.append(
+              first.prepend(
                 "<li class='change'>" +
                   inputVal +
                   "<a href='javascript:void(0)' class='remove'>&times</a></li>"
